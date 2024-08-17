@@ -1,7 +1,11 @@
 const userModel = require("../models/usermodels");
 const bcrypt = require('bcrypt');
-const jwt=require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
+const getData = async (req, res) => {
+    const data = await userModel.find({});
+    res.send(data);
+}
 const addUser = async (req, res) => {
     let { username, email, password, phone, id } = req.body
     password = await bcrypt.hash(password, 10)
@@ -53,4 +57,4 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = { addUser, deleteUser ,login};
+module.exports = { getData, addUser, deleteUser, login };
